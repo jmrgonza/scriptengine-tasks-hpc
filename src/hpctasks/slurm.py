@@ -68,10 +68,9 @@ class Sbatch(Task):
 
         sbatch_cmd_line.append("--")  # make sure further opts go to se command
 
-        sbatch_cmd_line.append("se")
-
         scripts = self.getarg("scripts", context, default=None)
         if scripts:
+            sbatch_cmd_line.append("se")
             sbatch_cmd_line.extend(
                 map(
                     str,
@@ -80,7 +79,7 @@ class Sbatch(Task):
             )
         else:
             # If no scripts were given, use the original SE command line
-            sbatch_cmd_line.extend(sys.argv[1:])
+            sbatch_cmd_line.extend(sys.argv)
         self.log_debug(f"SLURM sbatch command line: {sbatch_cmd_line}")
 
         self.log_info("Submitting job to SLURM queue")
