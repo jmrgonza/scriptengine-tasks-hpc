@@ -69,6 +69,7 @@ class Sbatch(Task):
         sbatch_cmd_line.append("--")  # make sure further opts go to se command
 
         sbatch_cmd_line.append(sys.argv[0])
+        self.log_debug(f"Actual se command: {sys.argv[0]}")
 
         scripts = self.getarg("scripts", context, default=None)
         if scripts:
